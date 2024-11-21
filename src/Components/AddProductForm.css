@@ -1,0 +1,68 @@
+/* General form container styling */
+.form-container {
+  display: grid;
+  grid-template-columns: 90% 10%;
+}
+.icon {
+  width: 2.35rem;
+  height: 2.35rem;
+  justify-self: center;
+  align-self: center;
+  cursor: pointer;
+}
+.form-container-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 20px;
+  align-self: center;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+/* Form group styling */
+.form-group-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  min-width: 120px;
+}
+
+/* Label styling */
+.form-label-row {
+  font-weight: bold;
+  /* margin-bottom: 5px; */
+  color: #555;
+}
+
+/* Input styling */
+.form-input-row {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Button styling */
+.form-button-row {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  align-self: flex-end;
+}
+
+/* Button hover effect */
+.form-button-row:hover {
+  background-color: #0056b3;
+}
