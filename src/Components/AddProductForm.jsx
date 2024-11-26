@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import CartIcon from "../Cart/CartIcon";
+import CartContext from "../store/cart-context";
+import MedContext from "../store/med-context";
+
 import "./AddProductForm.css";
 
 export default function AddProductForm() {
+  const medContext = useContext(MedContext);
+  const cartContext = useContext(CartContext);
+
   const [formData, setFormData] = useState({
     medicineName: "",
     description: "",
@@ -17,8 +23,8 @@ export default function AddProductForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Product Added:", formData);
     setFormData({ medicineName: "", description: "", price: "", quantity: "" });
+    medContext.addItem(formData);
   };
 
   return (
@@ -36,7 +42,7 @@ export default function AddProductForm() {
             onChange={handleChange}
             className="form-input-row"
             placeholder="Enter medicine name"
-            required
+            // required
           />
         </div>
         <div className="form-group-row">
@@ -51,7 +57,7 @@ export default function AddProductForm() {
             onChange={handleChange}
             className="form-input-row"
             placeholder="Enter description"
-            required
+            // required
           />
         </div>
         <div className="form-group-row">
@@ -66,7 +72,7 @@ export default function AddProductForm() {
             onChange={handleChange}
             className="form-input-row"
             placeholder="Enter price"
-            required
+            // required
           />
         </div>
         <div className="form-group-row">
@@ -81,16 +87,17 @@ export default function AddProductForm() {
             onChange={handleChange}
             className="form-input-row"
             placeholder="Enter quantity"
-            required
+            // required
           />
         </div>
         <button type="submit" className="form-button-row">
           Add Product
         </button>
       </form>
-      <span className="icon">
-        <CartIcon />
-      </span>{" "}
+      <span className="icon-container">
+        <CartIcon className="cart-icon" />
+        <span className="item-count">{cartContext.items.length}</span>
+      </span>
     </section>
   );
 }

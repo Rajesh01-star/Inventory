@@ -1,3 +1,3 @@
-export default function Medicines() {
-  return <>Medicines</>;
-}
+// export default function Medicines() {
+//   return <>Medicines</>;
+// }
