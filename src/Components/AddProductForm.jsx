@@ -1,11 +1,12 @@
 import React, { useContext, useState } from "react";
 import CartIcon from "../Cart/CartIcon";
-import CartContext from "../store/cart-context";
-import MedContext from "../store/med-context";
+
+import CartContext from "../store/cartContext";
+import MedContext from "../store/medContext";
 
 import "./AddProductForm.css";
 
-export default function AddProductForm() {
+export default function AddProductForm(props) {
   const medContext = useContext(MedContext);
   const cartContext = useContext(CartContext);
 
@@ -23,8 +24,12 @@ export default function AddProductForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const newItem = {
+      ...formData,
+      id: Math.random(),
+    };
     setFormData({ medicineName: "", description: "", price: "", quantity: "" });
-    medContext.addItem(formData);
+    medContext.addItem(newItem);
   };
 
   return (
@@ -94,10 +99,10 @@ export default function AddProductForm() {
           Add Product
         </button>
       </form>
-      <span className="icon-container">
-        <CartIcon className="cart-icon" />
-        <span className="item-count">{cartContext.items.length}</span>
-      </span>
+        <span className="icon-container" onClick={props.onShowCartItems}>
+          <CartIcon className="cart-icon" />
+          <span className="item-count">{cartContext.items.length}</span>
+        </span>
     </section>
   );
 }

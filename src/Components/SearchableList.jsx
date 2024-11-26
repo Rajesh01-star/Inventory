@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
-import MedContext from "../store/med-context";
-import CartContext from "../store/cart-context";
+import MedContext from "../store/medContext";
+import CartContext from "../store/cartContext";
 
 import "./SearchableList.css";
 import { eventWrapper } from "@testing-library/user-event/dist/utils";
@@ -11,14 +11,15 @@ export default function SearchableList() {
 
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredItems = medCntx.items.filter(
-    (item) => item.medicineName.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredItems = medCntx.items.filter((item) =>
+    item.medicineName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleAddToCartClick =(item)=>{
+  const handleAddToCartClick = (item) => {
     // console.log(item);
     cartCntx.addItem(item);
-  }
+    medCntx.quantityChange(item.id);
+  };
 
   return (
     <div className="searchable-list-container">
@@ -40,7 +41,12 @@ export default function SearchableList() {
               <div>
                 <span className="listItem-properties">{item.price}</span>
                 <span className="listItem-properties">{item.quantity}</span>
-                <button onClick={()=>handleAddToCartClick(item)}>Add to Cart</button>
+                <button
+                  disabled={medCntx.flag}
+                  onClick={() => handleAddToCartClick(item)}
+                >
+                  {medCntx.flag ? "Out of Stock" : "Add to Cart"}
+                </button>
               </div>
             </li>
           ))
